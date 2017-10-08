@@ -10,6 +10,8 @@ import threading
 
 class CaptureFacetimeCamera(threading.Thread):
     def run(self):
+        global flag
+
         camera = 1
         cap = cv2.VideoCapture(camera)
         print cap.isOpened()

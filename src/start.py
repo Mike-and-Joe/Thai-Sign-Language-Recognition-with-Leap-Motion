@@ -2,7 +2,7 @@ from lib import Leap
 
 from CaptureFacetimeCamera import CaptureFacetimeCamera
 from CaptureLeapCamera import CaptureLeapCamera
-from CaptureLeapApi import SampleListener
+import CaptureLeapApi, json
 
 import settings
 
@@ -14,3 +14,5 @@ if __name__ == '__main__':
 
     captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
     captureLeapCamera.start()
+
+    CaptureLeapApi.main()

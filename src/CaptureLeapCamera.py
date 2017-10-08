@@ -78,9 +78,7 @@ class CaptureLeapCamera(threading.Thread):
             controller.config.save()
 
     def capture(self):
-        global exitFlag
-
-        controller = Leap.Controller()
+        controller = settings.leap_controller
         controller.set_policy_flags(Leap.Controller.POLICY_IMAGES)
 
         maps_initialized = False
@@ -110,8 +108,6 @@ class CaptureLeapCamera(threading.Thread):
                 #display images
                 cv2.imshow('Left Camera', undistorted_left)
                 cv2.imshow('Right Camera', undistorted_right)
-
-                print settings.exitFlag
 
                 if (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
                     with settings.lock:

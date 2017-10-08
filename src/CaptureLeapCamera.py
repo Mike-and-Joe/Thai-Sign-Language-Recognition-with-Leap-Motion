@@ -82,6 +82,13 @@ class CaptureLeapCamera(threading.Thread):
 
         maps_initialized = False
 
+        frame_width = 400
+        frame_height = 400
+
+        fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+        out_left = cv2.VideoWriter('./record/leap_camera/left.avi',fourcc, 20.0, (frame_width,frame_height))
+        out_right = cv2.VideoWriter('./record/leap_camera/right.avi',fourcc, 20.0, (frame_width,frame_height))
+
         while(True):
             frame = controller.frame()
             image = frame.images[0]
@@ -91,8 +98,11 @@ class CaptureLeapCamera(threading.Thread):
                     right_coordinates, right_coefficients = self.convert_distortion_maps(frame.images[1])
                     maps_initialized = True
 
-                undistorted_left = self.undistort(image, left_coordinates, left_coefficients, 400, 400)
-                undistorted_right = self.undistort(image, right_coordinates, right_coefficients, 400, 400)
+                undistorted_left = self.undistort(image, left_coordinates, left_coefficients, frame_width, frame_height)
+                undistorted_right = self.undistort(image, right_coordinates, right_coefficients, frame_width, frame_height)
+
+                out_left.write(undistorted_left)
+                out_right.write(undistorted_right)
 
                 #display images
                 cv2.imshow('Left Camera', undistorted_left)

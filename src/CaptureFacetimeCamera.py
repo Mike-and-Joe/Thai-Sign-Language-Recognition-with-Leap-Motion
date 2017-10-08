@@ -12,23 +12,33 @@ class CaptureFacetimeCamera(threading.Thread):
     def run(self):
         global flag
 
-        camera = 1
+        camera = 0
         cap = cv2.VideoCapture(camera)
-        print cap.isOpened()
-        print cap.get(3)
+        cap_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        cap_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+
+        # Define the codec and create VideoWriter object
+        fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+        out = cv2.VideoWriter('./record/facetime_camera/output.avi',fourcc, 20.0, (cap_width,cap_height))
 
 
-        while True:
-            ret, img = cap.read()
+        while(cap.isOpened()):
+            ret, frame = cap.read()
 
             if ret == True:
-                fImg = cv2.flip(img, 1)
-                cv2.imshow('video output', fImg)
+                frame = cv2.flip(frame, 1)
+
+                # write the flipped frame
+                out.write(frame)
+
+                cv2.imshow('video output', frame)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             else:
                 break
 
+        # Release everything if job is finished
         cap.release()
+        out.release()
         cv2.destroyAllWindows()

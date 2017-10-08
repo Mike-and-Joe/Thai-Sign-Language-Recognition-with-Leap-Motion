@@ -5,12 +5,11 @@ Created on Sun Oct 08 12:21:05 2017
 @author: Pakpoom
 """
 
-import sys
-from lib import Leap
-import cv2
 import threading
+import cv2
 import numpy as np
-import math, ctypes
+import ctypes
+from lib import Leap
 
 class CaptureLeapCamera(threading.Thread):
 

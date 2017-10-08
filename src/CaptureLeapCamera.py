@@ -12,28 +12,6 @@ import threading
 import numpy as np
 import math, ctypes
 
-class CaptureFacetimeCamera(threading.Thread):
-    def run(self):
-        camera = 0
-        cap = cv2.VideoCapture(camera)
-        print cap.isOpened()
-        print cap.get(3)
-
-
-        while True:
-            ret, img = cap.read()
-
-            if ret == True:
-                cv2.imshow('video output', img)
-
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
-            else:
-                break
-
-        cap.release()
-        cv2.destroyAllWindows()
-
 class CaptureLeapCamera(threading.Thread):
 
     def undistort(self, image, coordinate_map, coefficient_map, width, height):

@@ -16,3 +16,10 @@ if __name__ == '__main__':
     captureLeapCamera.start()
 
     CaptureLeapApi.main()
+    
+    while(True):
+        record = raw_input("Record")
+        if record == "y":
+            settings.is_recording = True
+        else:
+            settings.is_recording = False

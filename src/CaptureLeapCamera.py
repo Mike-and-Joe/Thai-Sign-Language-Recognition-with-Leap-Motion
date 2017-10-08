@@ -77,6 +77,14 @@ class CaptureLeapCamera(threading.Thread):
             controller.config.set("tracking_images_mode", 2)
             controller.config.save()
 
+    def wait_for_ready(self):
+        while(True):
+            if not settings.is_ready['leap']:
+                with settings.lock:
+                    settings.is_ready['leap'] = True
+            elif settings.is_ready['facetime']:
+                break
+
     def capture(self):
         controller = settings.leap_controller
         controller.set_policy_flags(Leap.Controller.POLICY_IMAGES)
@@ -93,7 +101,10 @@ class CaptureLeapCamera(threading.Thread):
         while(True):
             frame = controller.frame()
             image = frame.images[0]
-            if image.is_valid:
+            
+            if image.is_valid & ((not settings.is_ready['facetime']) | (not settings.is_ready['leap'])):
+                self.wait_for_ready()
+            elif image.is_valid:
                 if not maps_initialized:
                     left_coordinates, left_coefficients = self.convert_distortion_maps(frame.images[0])
                     right_coordinates, right_coefficients = self.convert_distortion_maps(frame.images[1])
@@ -102,14 +113,29 @@ class CaptureLeapCamera(threading.Thread):
                 undistorted_left = self.undistort(image, left_coordinates, left_coefficients, frame_width, frame_height)
                 undistorted_right = self.undistort(image, right_coordinates, right_coefficients, frame_width, frame_height)
 
-                out_left.write(undistorted_left)
-                out_right.write(undistorted_right)
-
+                #convert frame to rgb 
+                undistorted_left = cv2.cvtColor(undistorted_left, cv2.COLOR_GRAY2RGB)
+                undistorted_right = cv2.cvtColor(undistorted_right, cv2.COLOR_GRAY2RGB)
+        
                 #display images
                 cv2.imshow('Left Camera', undistorted_left)
                 cv2.imshow('Right Camera', undistorted_right)
 
-                if (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
+                # save video
+                if settings.is_recording:
+                    cv2.waitKey(1)
+
+                    if not out_left.isOpened():
+                        # Define the codec and create VideoWriter object
+                        out_left.open('./record/leap_camera/left.avi',fourcc, 20.0, (frame_width,frame_height))
+                        out_right.open('./record/leap_camera/right.avi',fourcc, 20.0, (frame_width,frame_height))
+                    
+                    out_left.write(undistorted_left)
+                    out_right.write(undistorted_right)
+                elif out_left.isOpened():
+                    out_left.release()
+                    out_right.release()
+                elif (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
                     with settings.lock:
                         settings.exitFlag = True
                     break

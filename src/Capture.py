@@ -6,7 +6,7 @@ Created on Sun Oct 08 12:21:05 2017
 """
 
 import sys
-import lib.Leap
+from lib import Leap
 import cv2
 import threading
 import numpy as np

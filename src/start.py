@@ -15,8 +15,8 @@ if __name__ == '__main__':
     captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
     captureLeapCamera.start()
 
-    # CaptureLeapApi.main()
-
+    CaptureLeapApi.main()
+    
     while(True):
         record = raw_input("Record")
         if record == "y":

@@ -6,9 +6,7 @@ Created on Sun Oct 08 12:21:05 2017
 """
 
 import sys
-sys.path.insert(0, "../lib")
-sys.path.insert(0, "../lib/x64")
-import Leap
+import lib.Leap
 import cv2
 import threading
 import numpy as np
@@ -24,15 +22,15 @@ class CaptureFacetimeCamera(threading.Thread):
 
         while True:
             ret, img = cap.read()
-            
+
             if ret == True:
                 cv2.imshow('video output', img)
-                
+
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
             else:
                 break
-            
+
         cap.release()
         cv2.destroyAllWindows()
 
@@ -104,9 +102,9 @@ class CaptureLeapCamera(threading.Thread):
     def capture(self):
         controller = Leap.Controller()
         controller.set_policy_flags(Leap.Controller.POLICY_IMAGES)
-        
+
         maps_initialized = False
-        
+
         while(True):
             frame = controller.frame()
             image = frame.images[0]
@@ -125,7 +123,7 @@ class CaptureLeapCamera(threading.Thread):
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
-                
+
         cv2.destroyAllWindows()
 
     def run(self):

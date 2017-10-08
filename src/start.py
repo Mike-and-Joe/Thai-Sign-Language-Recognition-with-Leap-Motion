@@ -15,4 +15,4 @@ if __name__ == '__main__':
     captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
     captureLeapCamera.start()
 
-    CaptureLeapApi.main()
+    # CaptureLeapApi.main()

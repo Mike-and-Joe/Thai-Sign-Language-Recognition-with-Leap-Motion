@@ -14,7 +14,7 @@ class CaptureFacetimeCamera(threading.Thread):
     def run(self):
         global flag
 
-        camera = 1
+        camera = 0
         cap = cv2.VideoCapture(camera)
         cap_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         cap_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))

@@ -102,9 +102,13 @@ class CaptureLeapCamera(threading.Thread):
                 undistorted_left = self.undistort(image, left_coordinates, left_coefficients, frame_width, frame_height)
                 undistorted_right = self.undistort(image, right_coordinates, right_coefficients, frame_width, frame_height)
 
+                #convert frame to rgb 
+                undistorted_left = cv2.cvtColor(undistorted_left, cv2.COLOR_GRAY2RGB)
+                undistorted_right = cv2.cvtColor(undistorted_right, cv2.COLOR_GRAY2RGB)
+
                 out_left.write(undistorted_left)
                 out_right.write(undistorted_right)
-
+        
                 #display images
                 cv2.imshow('Left Camera', undistorted_left)
                 cv2.imshow('Right Camera', undistorted_right)

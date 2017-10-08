@@ -8,15 +8,14 @@ Created on Sun Oct 08 12:21:05 2017
 import cv2
 import threading
 
+import settings
+
 class CaptureFacetimeCamera(threading.Thread):
     def run(self):
-        global flag
-
         camera = 1
         cap = cv2.VideoCapture(camera)
         print cap.isOpened()
         print cap.get(3)
-
 
         while True:
             ret, img = cap.read()
@@ -25,7 +24,9 @@ class CaptureFacetimeCamera(threading.Thread):
                 fImg = cv2.flip(img, 1)
                 cv2.imshow('video output', fImg)
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
+                if (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
+                    with settings.lock:
+                        settings.exitFlag = True
                     break
             else:
                 break

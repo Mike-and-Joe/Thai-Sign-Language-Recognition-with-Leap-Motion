@@ -11,8 +11,9 @@ import numpy as np
 import ctypes
 from lib import Leap
 
-class CaptureLeapCamera(threading.Thread):
+import settings
 
+class CaptureLeapCamera(threading.Thread):
     def undistort(self, image, coordinate_map, coefficient_map, width, height):
         destination = np.empty((width, height), dtype = np.ubyte)
 
@@ -77,6 +78,8 @@ class CaptureLeapCamera(threading.Thread):
             controller.config.save()
 
     def capture(self):
+        global exitFlag
+
         controller = Leap.Controller()
         controller.set_policy_flags(Leap.Controller.POLICY_IMAGES)
 
@@ -98,7 +101,11 @@ class CaptureLeapCamera(threading.Thread):
                 cv2.imshow('Left Camera', undistorted_left)
                 cv2.imshow('Right Camera', undistorted_right)
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
+                print settings.exitFlag
+
+                if (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
+                    with settings.lock:
+                        settings.exitFlag = True
                     break
 
         cv2.destroyAllWindows()

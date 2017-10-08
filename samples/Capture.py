@@ -101,7 +101,7 @@ class CaptureLeapCamera(threading.Thread):
             controller.config.set("tracking_images_mode", 2)
             controller.config.save()
 
-    def run(self):
+    def capture(self):
         controller = Leap.Controller()
         controller.set_policy_flags(Leap.Controller.POLICY_IMAGES)
         
@@ -128,8 +128,8 @@ class CaptureLeapCamera(threading.Thread):
                 
         cv2.destroyAllWindows()
 
-    def main(self):
+    def run(self):
         try:
-            self.run()
+            self.capture()
         except KeyboardInterrupt:
             sys.exit(0)

@@ -8,11 +8,13 @@ Created on Sun Oct 08 12:21:05 2017
 import cv2
 import threading
 
+import settings
+
 class CaptureFacetimeCamera(threading.Thread):
     def run(self):
         global flag
 
-        camera = 0
+        camera = 1
         cap = cv2.VideoCapture(camera)
         cap_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         cap_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -20,7 +22,6 @@ class CaptureFacetimeCamera(threading.Thread):
         # Define the codec and create VideoWriter object
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
         out = cv2.VideoWriter('./record/facetime_camera/output.avi',fourcc, 20.0, (cap_width,cap_height))
-
 
         while(cap.isOpened()):
             ret, frame = cap.read()
@@ -33,7 +34,9 @@ class CaptureFacetimeCamera(threading.Thread):
 
                 cv2.imshow('video output', frame)
 
-                if cv2.waitKey(1) & 0xFF == ord('q'):
+                if (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
+                    with settings.lock:
+                        settings.exitFlag = True
                     break
             else:
                 break

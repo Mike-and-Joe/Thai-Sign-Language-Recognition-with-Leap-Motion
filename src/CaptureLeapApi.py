@@ -9,6 +9,7 @@
 import sys, thread, time
 from lib import Leap
 
+import settings
 
 class SampleListener(Leap.Listener):
     finger_names = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky']

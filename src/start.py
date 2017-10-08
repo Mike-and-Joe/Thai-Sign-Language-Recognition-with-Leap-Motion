@@ -1,5 +1,7 @@
 from CaptureLeapCamera import CaptureLeapCamera
 from CaptureFacetimeCamera import CaptureFacetimeCamera
+from CaptureLeapApi import SampleListener
+from lib import Leap
 
 if __name__ == '__main__':
     captureFacetimeCamera = CaptureFacetimeCamera(name = "CaptureFacetimeCamera")

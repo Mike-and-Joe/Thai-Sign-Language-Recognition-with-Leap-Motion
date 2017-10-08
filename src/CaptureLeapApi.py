@@ -6,7 +6,8 @@
 # between Leap Motion and you, your company or other organization.             #
 ################################################################################
 
-import Leap, sys, thread, time
+import sys, thread, time
+from lib import Leap
 
 
 class SampleListener(Leap.Listener):

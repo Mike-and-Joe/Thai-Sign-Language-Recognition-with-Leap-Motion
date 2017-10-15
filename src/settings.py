@@ -3,6 +3,9 @@ import threading
 from lib import Leap
 
 def init():
+    global path
+    path = 'record'
+
     global lock
     lock = threading.Lock()
 
@@ -17,3 +20,9 @@ def init():
 
     global is_recording
     is_recording = True
+
+    global file_name
+    file_name = ''
+
+    global file_index
+    file_index = 0

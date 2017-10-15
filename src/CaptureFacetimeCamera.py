@@ -11,6 +11,8 @@ import threading
 import settings
 
 class CaptureFacetimeCamera(threading.Thread):
+    camera = 1
+
     def wait_for_ready(self):
         while(True):
             if not settings.is_ready['facetime']:
@@ -20,10 +22,7 @@ class CaptureFacetimeCamera(threading.Thread):
                 break
 
     def run(self):
-        global flag
-
-        camera = 1
-        cap = cv2.VideoCapture(camera)
+        cap = cv2.VideoCapture(self.camera)
         cap_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         cap_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 

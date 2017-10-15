@@ -15,6 +15,12 @@ from lib import Leap
 import settings
 
 class CaptureLeapCamera(threading.Thread):
+    frame_width = 640
+    frame_height = 240
+    sides = ['left', 'right']
+    raw_image = {}
+    output = {}
+
     def image_to_pil(self, leap_image):
         address = int(leap_image.data_pointer)
         ctype_array_def = ctypes.c_ubyte * leap_image.width * leap_image.height
@@ -54,16 +60,10 @@ class CaptureLeapCamera(threading.Thread):
         controller = settings.leap_controller
         controller.set_policy_flags(Leap.Controller.POLICY_IMAGES)
 
-        frame_width = 640
-        frame_height = 240
-
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        sides = ['left', 'right']
-        raw_image = {}
-        output = {}
 
-        for i, s in enumerate(sides) :
-            output[s] = cv2.VideoWriter('./record/leap_camera/' + str(s) + '.avi',fourcc, 40.0, (frame_width,frame_height))
+        for i, s in enumerate(self.sides) :
+            self.output[s] = cv2.VideoWriter('./record/leap_camera/' + str(s) + '.avi',fourcc, 40.0, (self.frame_width, self.frame_height))
 
         while(True):
             frame = controller.frame()
@@ -72,27 +72,27 @@ class CaptureLeapCamera(threading.Thread):
             if image.is_valid & ((not settings.is_ready['facetime']) | (not settings.is_ready['leap'])):
                 self.wait_for_ready()
             elif image.is_valid:
-                for i, s in enumerate(sides) :
+                for i, s in enumerate(self.sides) :
                     # getting raw images
-                    raw_image[s] = self.convertCV(frame.images[i])
+                    self.raw_image[s] = self.convertCV(frame.images[i])
                     # display images
-                    cv2.imshow(s, raw_image[s])
+                    cv2.imshow(s, self.raw_image[s])
 
                 # save video
                 if settings.is_recording:
                     cv2.waitKey(1)
 
-                    if not output['left'].isOpened():
+                    if not self.output['left'].isOpened():
                         # Define the codec and create VideoWriter object
-                        for i, s in enumerate(sides) :
-                            output[s].open('./record/leap_camera/' + str(s) + '.avi',fourcc, 40.0, (frame_width,frame_height))
+                        for i, s in enumerate(self.sides) :
+                            self.output[s].open('./record/leap_camera/' + str(s) + '.avi',fourcc, 40.0, (self.frame_width, self.frame_height))
 
-                    for i, s in enumerate(sides) :
-                        output[s].write(raw_image[s])
+                    for i, s in enumerate(self.sides) :
+                        self.output[s].write(self.raw_image[s])
 
-                elif output['left'].isOpened():
-                    for i, s in enumerate(sides) :
-                        output[s].release()
+                elif self.output['left'].isOpened():
+                    for i, s in enumerate(self.sides) :
+                        self.output[s].release()
 
                 elif (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
                     with settings.lock:

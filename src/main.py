@@ -37,8 +37,8 @@ def init () :
     captureFacetimeCamera = CaptureFacetimeCamera(name = "CaptureFacetimeCamera")
     captureFacetimeCamera.start()
 
-    # captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
-    # captureLeapCamera.start()
+    captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
+    captureLeapCamera.start()
     #
     # captureLeapApi = CaptureLeapApi(name = "CaptureLeapApi")
     # captureLeapApi.start()

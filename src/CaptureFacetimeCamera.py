@@ -23,7 +23,9 @@ class CaptureFacetimeCamera(threading.Thread):
 
     def preparing(self):
         while(True):
-            if self.cap.isOpened():
+            ret, frame = self.cap.read()
+
+            if ret == True:
                 self.set_ready(True)
                 break
             else:

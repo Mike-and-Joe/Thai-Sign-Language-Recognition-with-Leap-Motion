@@ -6,6 +6,9 @@ def init():
     global path
     path = 'record'
 
+    global camera_index
+    camera_index = 1
+
     global lock
     lock = threading.Lock()
 
@@ -16,10 +19,13 @@ def init():
     exitFlag = False
 
     global is_ready
-    is_ready = {'facetime': False, 'leap': False}
+    is_ready = {'facetime': False, 'leap': False, 'api': False}
 
     global is_recording
-    is_recording = True
+    is_recording = False
+
+    global is_open
+    is_open = {'facetime': False, 'leap': False, 'api': False}
 
     global file_name
     file_name = ''

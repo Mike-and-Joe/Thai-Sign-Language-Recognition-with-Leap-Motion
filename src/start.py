@@ -1,7 +1,7 @@
-import main, settings
+import main, settings, utils
 
 # Import the modules needed to run the script.
-import sys, os
+import sys, os, time
 
 # =======================
 #     MENUS FUNCTIONS
@@ -10,15 +10,14 @@ import sys, os
 # Main menu
 
 def main_menu():
-    os.system('cls')
+    clear_screen()
 
     print "Welcome,\n"
     print "Please choose the menu you want to start:"
     print "1. Start"
-    print "0. Quit"
+    print "\n0. Quit"
     choice = raw_input(" >>  ")
     exec_menu(choice, {
-        'main_menu': main_menu,
         '1': menu_enter_name,
         '0': exit,
     })
@@ -27,43 +26,44 @@ def main_menu():
 
 # Execute menu
 def exec_menu(choice, action):
-    os.system('cls')
     ch = choice.lower()
     if ch == '':
-        return
+        main_menu()
     else:
         try:
             action[ch]()
         except KeyError:
             print "Invalid selection, please try again.\n"
-            action[ch]()
+            main_menu()
     return
 
 # Menu Name
 def menu_enter_name():
+    clear_screen()
+
     default = settings.file_name
     default_str = default and ('['+ default +']') or ''
 
-    name = raw_input("Enter File's name " + default_str + ": ")
+    name = raw_input("Enter File's name " + default_str + ": >>")
     main.set_file_name(name or default)
 
-    main.create_folder(settings.path + '/' + settings.file_name)
+    utils.create_folder(settings.path + '/' + settings.file_name)
 
     menu_enter_index()
 
 # Menu Index
 def menu_enter_index():
-    default = main.get_last_index_from_folder(settings.path + '/' + settings.file_name)
+    default = int(utils.get_last_index_from_folder(settings.path + '/' + settings.file_name)) + 1
     default_str = ('['+ str(default) +']') or ''
 
-    index = raw_input("Enter File's index " + default_str + " : ")
+    index = raw_input("Enter File's index " + default_str + " : >> ")
     main.set_file_index(index and int(index) or default)
 
     menu_record_preparing()
 
 # Menu Record Decision
 def menu_record_preparing():
-    os.system('cls')
+    clear_screen()
 
     print "Record Menu,\n"
     print "Please choose the menu you want to start:"
@@ -81,18 +81,33 @@ def menu_record_preparing():
 
 # Menu Start Record
 def menu_start_record():
-    # TODO: Start Recording Menu
-    return
+    clear_screen()
 
-# Back to main menu
-def back():
-    menu_actions['main_menu']()
+    print "Recording.....,\n"
+    print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
+    choice = raw_input(" Start ? ")
+
+    main.start_record()
+    start_record = time.time()
+
+    choice = raw_input(" Stop ! ")
+
+    print '\nTotal time : ' + str(time.time() - start_record)
+    main.stop_record()
+
+    print "\nNext index,\n"
+    menu_enter_index()
+
+    return
 
 # Exit program
 def exit():
     main.exit()
     sys.exit()
 
+# Clear screen
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # =======================
 #      MAIN PROGRAM
@@ -100,6 +115,9 @@ def exit():
 
 # Main Program
 if __name__ == "__main__":
+    # Initialized Settings
     settings.init()
+    # Initialized Cameras
+    main.init()
     # Launch main menu
     main_menu()

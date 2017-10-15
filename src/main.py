@@ -4,18 +4,8 @@ import settings
 
 from CaptureFacetimeCamera import CaptureFacetimeCamera
 from CaptureLeapCamera import CaptureLeapCamera
-import CaptureLeapApi, json
-
-def create_folder(directory) :
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-def get_last_index_from_folder(directory) :
-    arr_txt = [x for x in os.listdir(directory) if x.endswith(".txt")]
-    if len(arr_txt):
-        return int(arr_txt[len(arr_txt)-1].split('.')[0])
-    else:
-        return 0
+from CaptureLeapApi import CaptureLeapApi
+import json
 
 def set_file_name (file_name) :
     with settings.lock:
@@ -33,9 +23,24 @@ def exit () :
     with settings.lock:
         settings.exitFlag = True
 
+def start_record () :
+    with settings.lock:
+        for key in settings.is_open:
+            settings.is_open[key] = False
+
+        settings.is_recording = True
+
+def stop_record () :
+    set_is_recording(False)
+
 def init () :
     captureFacetimeCamera = CaptureFacetimeCamera(name = "CaptureFacetimeCamera")
     captureFacetimeCamera.start()
 
-    captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
-    captureLeapCamera.start()
+    # captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
+    # captureLeapCamera.start()
+    #
+    # captureLeapApi = CaptureLeapApi(name = "CaptureLeapApi")
+    # captureLeapApi.start()
+
+    # captureFacetimeCamera.join()

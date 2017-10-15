@@ -22,18 +22,18 @@ class CaptureFacetimeCamera(threading.Thread):
     def run(self):
         global flag
 
-        camera = 0
+        camera = 1
         cap = cv2.VideoCapture(camera)
         cap_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         cap_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    
+
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
         out = cv2.VideoWriter('./record/facetime_camera/output.avi',fourcc, 20.0, (cap_width,cap_height))
 
         while(cap.isOpened()):
             if (not settings.is_ready['facetime']) | (not settings.is_ready['leap']):
                 self.wait_for_ready()
-            
+
             ret, frame = cap.read()
 
             if ret == True:
@@ -48,7 +48,7 @@ class CaptureFacetimeCamera(threading.Thread):
                     if not out.isOpened():
                         # Define the codec and create VideoWriter object
                         out.open('./record/facetime_camera/output.avi',fourcc, 20.0, (cap_width,cap_height))
-                    
+
                     out.write(frame)
                 elif out.isOpened():
                     out.release()
@@ -56,7 +56,7 @@ class CaptureFacetimeCamera(threading.Thread):
                     with settings.lock:
                         settings.exitFlag = True
                     break
-                
+
             else:
                 break
 

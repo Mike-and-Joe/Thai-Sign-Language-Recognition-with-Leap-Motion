@@ -16,4 +16,4 @@ def init():
     is_ready = {'facetime': False, 'leap': False}
 
     global is_recording
-    is_recording = False
+    is_recording = True

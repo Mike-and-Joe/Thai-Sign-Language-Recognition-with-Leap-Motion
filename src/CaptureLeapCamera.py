@@ -37,43 +37,6 @@ class CaptureLeapCamera(threading.Thread):
         cv_img = np.array(pil_img)[:,:,::-1].copy()             #still has three channels
         return cv_img
 
-    def capture(self):
-
-        while(True):
-            frame = self.controller.frame()
-            image = frame.images[0]
-
-            if image.is_valid & ((not settings.is_ready['facetime']) | (not settings.is_ready['leap'])):
-                self.wait_for_ready()
-            elif image.is_valid:
-                for i, s in enumerate(self.sides) :
-                    # getting raw images
-                    self.raw_image[s] = self.convertCV(frame.images[i])
-                    # display images
-                    cv2.imshow(s, self.raw_image[s])
-
-                # save video
-                if settings.is_recording:
-                    cv2.waitKey(1)
-
-                    if not self.output['left'].isOpened():
-                        # Define the codec and create VideoWriter object
-                        for i, s in enumerate(self.sides) :
-                            self.output[s].open('./record/leap_camera/' + str(s) + '.avi',fourcc, 40.0, (self.frame_width, self.frame_height))
-
-                    for i, s in enumerate(self.sides) :
-                        self.output[s].write(self.raw_image[s])
-
-                elif self.output['left'].isOpened():
-                    for i, s in enumerate(self.sides) :
-                        self.output[s].release()
-
-                elif (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
-                    with settings.lock:
-                        settings.exitFlag = True
-                    break
-
-
     def __init__(self, name):
         threading.Thread.__init__(self)
         self.process = None

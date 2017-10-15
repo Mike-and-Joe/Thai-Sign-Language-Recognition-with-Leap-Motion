@@ -14,16 +14,26 @@ from lib import Leap
 
 import settings
 
-class CaptureLeapCamera(threading.Thread):
-    def leap_to_array(self,leap_img):
-        imdata = ctypes.cast(leap_img.data.cast().__long__(), ctypes.POINTER(leap_img.width*leap_img.height*ctypes.c_ubyte)).contents
-        return np.reshape(np.array(imdata,'int'),(leap_img.height,leap_img.width))
+import time
 
-    def convertPIL(self,leap_img):
-        return Image.fromarray(self.leap_to_array(leap_img)).convert("RGB")
+class CaptureLeapCamera(threading.Thread):
+    def image_to_pil(self, leap_image):
+        address = int(leap_image.data_pointer)
+        ctype_array_def = ctypes.c_ubyte * leap_image.width * leap_image.height
+        # as ctypes array:
+        as_ctype_array = ctype_array_def.from_address(address)
+        # as numpy array:
+        as_numpy_array = np.ctypeslib.as_array(as_ctype_array)
+        buffer = np.reshape(as_numpy_array, (leap_image.height, leap_image.width))
+        # to PIL Image:
+        pil_image = Image.fromarray(buffer, "L")
+        # change format for QT:
+        pil_image = pil_image.convert("RGB")
+
+        return pil_image
 
     def convertCV(self,leap_img):
-        pil_img = self.convertPIL(leap_img)
+        pil_img = self.image_to_pil(leap_img)
         cv_img = np.array(pil_img)[:,:,::-1].copy()             #still has three channels
         return cv_img
 
@@ -50,8 +60,11 @@ class CaptureLeapCamera(threading.Thread):
         frame_height = 240
 
         fourcc = cv2.VideoWriter_fourcc(*'MJPG')
-        out_left = cv2.VideoWriter('./record/leap_camera/left.avi',fourcc, 20.0, (frame_width,frame_height))
-        out_right = cv2.VideoWriter('./record/leap_camera/right.avi',fourcc, 20.0, (frame_width,frame_height))
+        out_left = cv2.VideoWriter('./record/leap_camera/left.avi',fourcc, 40.0, (frame_width,frame_height))
+        out_right = cv2.VideoWriter('./record/leap_camera/right.avi',fourcc, 40.0, (frame_width,frame_height))
+
+        start_time = time.time()
+        count = 0
 
         while(True):
             frame = controller.frame()
@@ -60,13 +73,8 @@ class CaptureLeapCamera(threading.Thread):
             if image.is_valid & ((not settings.is_ready['facetime']) | (not settings.is_ready['leap'])):
                 self.wait_for_ready()
             elif image.is_valid:
-
                 undistorted_left = self.convertCV(frame.images[0])
                 undistorted_right = self.convertCV(frame.images[1])
-
-                # convert frame to rgb
-                # undistorted_left = cv2.cvtColor(undistorted_left, cv2.COLOR_GRAY2RGB)
-                # undistorted_right = cv2.cvtColor(undistorted_right, cv2.COLOR_GRAY2RGB)
 
                 # display images
                 cv2.imshow('Left Camera', undistorted_left)
@@ -78,8 +86,8 @@ class CaptureLeapCamera(threading.Thread):
 
                     if not out_left.isOpened():
                         # Define the codec and create VideoWriter object
-                        out_left.open('./record/leap_camera/left.avi',fourcc, 20.0, (frame_width,frame_height))
-                        out_right.open('./record/leap_camera/right.avi',fourcc, 20.0, (frame_width,frame_height))
+                        out_left.open('./record/leap_camera/left.avi',fourcc, 40.0, (frame_width,frame_height))
+                        out_right.open('./record/leap_camera/right.avi',fourcc, 40.0, (frame_width,frame_height))
 
                     out_left.write(undistorted_left)
                     out_right.write(undistorted_right)

@@ -124,11 +124,18 @@ def menu_start_record():
     t = threading.Thread(name='menu_show_recording', target=menu_show_recording, args=([start_record]))
     t.start()
 
+    conclusion_screen(start_record)
+
+# Conclusion screen
+def conclusion_screen (start_record) :
     choice = raw_input(" Stop ! ")
     main.stop_record()
+    clear_screen()
 
     print '\nTotal time : ' + str(time.time() - start_record)
+    print '\nWriting Files...'
     main.wait_for_finish()
+    print '\nDone'
 
     print "\nNext index,\n"
     menu_enter_index()

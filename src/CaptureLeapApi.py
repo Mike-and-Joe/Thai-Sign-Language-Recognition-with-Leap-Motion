@@ -19,8 +19,8 @@ def get_list_from_vector (vector) :
     return alist
 
 class ApiRecorder():
-    finger_names = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky']
-    bone_names = ['Metacarpal', 'Proximal', 'Intermediate', 'Distal']
+    finger_names = ['thumb', 'index', 'middle', 'ring', 'pinky']
+    bone_names = ['metacarpal', 'proximal', 'intermediate', 'distal']
     path = ''
     export_data = []
 
@@ -69,28 +69,30 @@ class ApiRecorder():
             }
 
             # Get fingers
-            _fingers = []
+            _fingers = {}
             for finger in hand.fingers:
                 _finger = {
-                    'finger_name': self.finger_names[finger.type],
                     'id': finger.id,
                     'length': finger.length,
                     'widt': finger.width
                 }
 
                 # Get bones
-                _bones = []
+                _bones = {}
                 for b in range(0, 4):
                     bone = finger.bone(b)
-                    _bones.append({
-                        'bone_name': self.bone_names[bone.type],
+                    bone_name = self.bone_names[bone.type]
+
+                    _bones[bone_name] = {
                         'prev_joint': get_list_from_vector(bone.prev_joint),
                         'next_joint': get_list_from_vector(bone.next_joint),
                         'direction': get_list_from_vector(bone.direction)
-                    })
+                    }
+
                 _finger['bones'] = _bones
 
-                _fingers.append(_finger)
+                finger_name = self.finger_names[finger.type]
+                _fingers[finger_name] = _finger
 
             _hand.update({ 'fingers': _fingers })
 

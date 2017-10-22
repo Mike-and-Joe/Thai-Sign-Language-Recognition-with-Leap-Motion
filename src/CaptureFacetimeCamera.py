@@ -1,6 +1,6 @@
 import cv2, threading, time
 
-import settings, utils
+import settings, main
 
 class CaptureFacetimeCamera(threading.Thread):
     cap = cv2.VideoCapture(1)
@@ -16,13 +16,17 @@ class CaptureFacetimeCamera(threading.Thread):
         self.process = None
         self.name = name
 
+    def set_is_open (self, value):
+        with settings.lock:
+            settings.is_open['facetime'] = value
+
     def set_ready(self, is_ready):
         if not settings.is_ready['facetime']:
             with settings.lock:
                 settings.is_ready['facetime'] = is_ready
 
     def preparing(self):
-        while not utils.is_all_ready():
+        while not main.is_all_ready():
             ret, frame = self.cap.read()
 
             if ret == True:
@@ -48,8 +52,9 @@ class CaptureFacetimeCamera(threading.Thread):
                     self.record(frame)
                 elif self.out and self.out.isOpened and self.out.isOpened():
                     self.out.release()
+                    self.set_is_open(False)
 
-                if utils.wait_for_exit_key():
+                if main.wait_for_exit_key():
                     print 'Exit!'
                     break
 
@@ -63,8 +68,7 @@ class CaptureFacetimeCamera(threading.Thread):
         if not settings.is_open['facetime']:
             self.path = self.getPath()
             self.out = cv2.VideoWriter(self.path, self.fourcc, 20.0, (self.cap_width,self.cap_height))
-            with settings.lock:
-                settings.is_open['facetime'] = True
+            self.set_is_open(True)
 
         if not self.out.isOpened():
             # Define the codec and create VideoWriter object

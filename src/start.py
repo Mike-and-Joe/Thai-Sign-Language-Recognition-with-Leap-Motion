@@ -1,7 +1,7 @@
 import main, settings, utils
 
 # Import the modules needed to run the script.
-import sys, os, time
+import sys, os, time, threading, cv2
 
 # =======================
 #     MENUS FUNCTIONS
@@ -45,7 +45,7 @@ def menu_enter_name():
     default_str = default and ('['+ default +']') or ''
 
     name = raw_input("Enter File's name " + default_str + ": >>")
-    main.set_file_name(name or default)
+    main.set_settings('file_name', name or default)
 
     utils.create_folder(settings.path + '/' + settings.file_name)
 
@@ -66,7 +66,7 @@ def menu_enter_index():
     elif (index_raw != '') :
         index = int(index_raw)
 
-    main.set_file_index(index)
+    main.set_settings('file_index', index)
 
     menu_record_preparing()
 
@@ -96,10 +96,17 @@ def menu_show_ready_list () :
 
 def is_device_on () :
     while (True) :
-        if utils.is_all_ready() :
+        if main.is_all_ready() :
             break
         time.sleep(0.100)
         menu_show_ready_list()
+
+def menu_show_recording (start_record) :
+    while settings.is_recording :
+        clear_screen()
+        print "\nRecording.....,\n"
+        print '\nTime : ', time.time() - start_record
+        print '\n Stop ! '
 
 # Menu Start Record
 def menu_start_record():
@@ -110,15 +117,25 @@ def menu_start_record():
     print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
     choice = raw_input(" Start ? ")
 
-    print "\nRecording.....,\n"
 
     main.start_record()
     start_record = time.time()
 
+    t = threading.Thread(name='menu_show_recording', target=menu_show_recording, args=([start_record]))
+    t.start()
+
+    conclusion_screen(start_record)
+
+# Conclusion screen
+def conclusion_screen (start_record) :
     choice = raw_input(" Stop ! ")
+    main.stop_record()
+    clear_screen()
 
     print '\nTotal time : ' + str(time.time() - start_record)
-    main.stop_record()
+    print '\nWriting Files...'
+    main.wait_for_finish()
+    print '\nDone'
 
     print "\nNext index,\n"
     menu_enter_index()
@@ -133,7 +150,7 @@ def exit():
 # Clear screen
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
-    pass
+    # pass
 
 # =======================
 #      MAIN PROGRAM

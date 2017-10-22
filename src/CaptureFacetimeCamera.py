@@ -22,21 +22,18 @@ class CaptureFacetimeCamera(threading.Thread):
                 settings.is_ready['facetime'] = is_ready
 
     def preparing(self):
-        while(True):
+        while not utils.is_all_ready():
             ret, frame = self.cap.read()
 
             if ret == True:
                 self.set_ready(True)
-                break
             else:
                 self.set_ready(False)
 
             if settings.exitFlag == True:
                 self.stop()
                 break
-            time.sleep(0.3)
-
-        utils.wait_for_ready(self)
+            time.sleep(0.300)
 
     def ready(self):
         while(self.cap.isOpened()):

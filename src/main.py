@@ -39,7 +39,7 @@ def init () :
 
     captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
     captureLeapCamera.start()
-    #
+
     # captureLeapApi = CaptureLeapApi(name = "CaptureLeapApi")
     # captureLeapApi.start()
 

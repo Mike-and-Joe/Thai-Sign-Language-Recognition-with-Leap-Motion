@@ -48,7 +48,6 @@ class CaptureLeapCamera(threading.Thread):
                 settings.is_ready['leap_camera'] = is_ready
 
     def preparing(self):
-        print 'preparing'
         while(True):
             frame = self.controller.frame()
             image = frame.images[0]
@@ -64,7 +63,6 @@ class CaptureLeapCamera(threading.Thread):
                 break
             time.sleep(0.3)
 
-        print 'wait_for_ready'
         utils.wait_for_ready(self)
 
     def ready(self):

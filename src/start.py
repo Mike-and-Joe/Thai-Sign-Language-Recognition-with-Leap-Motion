@@ -108,6 +108,7 @@ def exit():
 # Clear screen
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
+    # pass
 
 # =======================
 #      MAIN PROGRAM

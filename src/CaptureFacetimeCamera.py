@@ -3,7 +3,7 @@ import cv2, threading, time
 import settings, utils
 
 class CaptureFacetimeCamera(threading.Thread):
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
     cap_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     cap_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 

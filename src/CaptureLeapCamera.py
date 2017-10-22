@@ -5,7 +5,7 @@ import ctypes
 from PIL import Image
 from lib import Leap
 
-import settings, utils
+import settings, main
 
 class CaptureLeapCamera(threading.Thread):
     controller = None
@@ -42,13 +42,17 @@ class CaptureLeapCamera(threading.Thread):
         self.process = None
         self.name = name
 
+    def set_is_open (self, value):
+        with settings.lock:
+            settings.is_open['leap_camera'] = value
+
     def set_ready(self, is_ready):
         if not settings.is_ready['leap_camera']:
             with settings.lock:
                 settings.is_ready['leap_camera'] = is_ready
 
     def preparing(self):
-        while not utils.is_all_ready():
+        while not main.is_all_ready():
             frame = self.controller.frame()
             image = frame.images[0]
 
@@ -81,8 +85,9 @@ class CaptureLeapCamera(threading.Thread):
                 elif self.output and self.output['left'] and self.output['left'].isOpened and self.output['left'].isOpened():
                     for i, s in enumerate(self.sides) :
                         self.output[s].release()
+                        self.set_is_open(False)
 
-                if utils.wait_for_exit_key():
+                if main.wait_for_exit_key():
                     print 'Exit!'
                     break
 
@@ -101,8 +106,7 @@ class CaptureLeapCamera(threading.Thread):
             for i, s in enumerate(self.sides) :
                 self.output[s] = cv2.VideoWriter(self.path[s], self.fourcc, 40.0, (self.frame_width, self.frame_height))
 
-            with settings.lock:
-                settings.is_open['leap_camera'] = True
+            self.set_is_open(True)
 
         if not self.output['left'].isOpened():
             # Define the codec and create VideoWriter object

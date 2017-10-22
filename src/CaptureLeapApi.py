@@ -123,18 +123,20 @@ class ApiRecorder():
 class SampleListener(Leap.Listener):
     api_recorder = ApiRecorder()
 
-    # def on_init(self, controller):
-    #     print "Initialized"
-    #
-    # def on_connect(self, controller):
-    #     print "Connected"
-    #
-    # def on_disconnect(self, controller):
-    #     # Note: not dispatched when running in a debugger.
-    #     print "Disconnected"
-    #
-    # def on_exit(self, controller):
-    #     print "Exited"
+    def set_ready(self, is_ready):
+        if not settings.is_ready['leap_api']:
+            with settings.lock:
+                settings.is_ready['leap_api'] = is_ready
+
+    def on_exit(self, controller):
+        self.set_ready(False)
+
+    def on_connect(self, controller):
+        self.set_ready(True)
+
+    def on_disconnect(self, controller):
+        # Note: not dispatched when running in a debugger.
+        self.set_ready(False)
 
     def on_frame(self, controller):
         frame = controller.frame()

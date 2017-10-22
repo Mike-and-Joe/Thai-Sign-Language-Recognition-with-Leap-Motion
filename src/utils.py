@@ -3,11 +3,14 @@ import settings
 
 def wait_for_ready(_self):
     while(True):
-        if all(item for item in settings.is_ready):
+        if is_all_ready():
             break
         if settings.exitFlag == True:
             _self.stop()
         time.sleep(0.100)
+
+def is_all_ready () :
+    return all(value for key, value in settings.is_ready.iteritems())
 
 def wait_for_exit_key():
     if (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :

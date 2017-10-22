@@ -15,11 +15,11 @@ def main_menu():
     print "Welcome,\n"
     print "Please choose the menu you want to start:"
     print "1. Start"
-    print "\n0. Quit"
+    print "\nq. Quit"
     choice = raw_input(" >>  ")
     exec_menu(choice, {
         '1': menu_enter_name,
-        '0': exit,
+        'q': exit,
     })
 
     return
@@ -57,6 +57,12 @@ def menu_enter_index():
     default_str = ('['+ str(default) +']') or ''
 
     index = raw_input("Enter File's index " + default_str + " : >> ")
+
+    if (index == 'q') :
+        exit()
+
+        return
+    
     main.set_file_index(index and int(index) or default)
 
     menu_record_preparing()
@@ -69,12 +75,12 @@ def menu_record_preparing():
     print "Please choose the menu you want to start:"
     print "1. Start record '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + ".txt'"
     print "2. Edit Name & Index"
-    print "\n0. Quit"
+    print "\nq. Quit"
     choice = raw_input(" >>  ")
     exec_menu(choice, {
         '1': menu_start_record,
         '2': menu_enter_name,
-        '0': exit,
+        'q': exit,
     })
 
     return

@@ -56,14 +56,17 @@ def menu_enter_index():
     default = int(utils.get_last_index_from_folder(settings.path + '/' + settings.file_name)) + 1
     default_str = ('['+ str(default) +']') or ''
 
-    index = raw_input("Enter File's index " + default_str + " : >> ")
+    index = default
 
-    if (index == 'q') :
+    index_raw = raw_input("Enter File's index " + default_str + " : >> ")
+
+    if (index_raw == 'q') :
         exit()
-
         return
-    
-    main.set_file_index(index and int(index) or default)
+    elif (index_raw != '') :
+        index = int(index_raw)
+
+    main.set_file_index(index)
 
     menu_record_preparing()
 

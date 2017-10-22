@@ -6,7 +6,7 @@
 # between Leap Motion and you, your company or other organization.             #
 ################################################################################
 
-import sys, thread, time, json
+import sys, thread, time, json, threading, time
 from lib import Leap
 from pprint import pprint
 
@@ -18,26 +18,12 @@ def get_list_from_vector (vector) :
         alist.append(vector[index])
     return alist
 
-class SampleListener(Leap.Listener):
+class ApiRecorder():
     finger_names = ['Thumb', 'Index', 'Middle', 'Ring', 'Pinky']
     bone_names = ['Metacarpal', 'Proximal', 'Intermediate', 'Distal']
+    path = ''
 
-    def on_init(self, controller):
-        print "Initialized"
-
-    def on_connect(self, controller):
-        print "Connected"
-
-    def on_disconnect(self, controller):
-        # Note: not dispatched when running in a debugger.
-        print "Disconnected"
-
-    def on_exit(self, controller):
-        print "Exited"
-
-    def on_frame(self, controller):
-        frame = controller.frame()
-
+    def transform_to_json (self, frame) :
         export_data = {
             'frame_id': frame.id,
             'timestamp': frame.timestamp,
@@ -103,75 +89,71 @@ class SampleListener(Leap.Listener):
             # print _hand
             export_data['hands'][_handType] = _hand
             # print export_data
+        return export_data
 
-        with open('data.txt', 'a') as out:
+    def getPath(self):
+        return '/'.join(str(x) for x in [settings.path, settings.file_name, 'json_' + str(settings.file_index)]) + '.txt'
+
+    def record (self, frame) :
+        if not settings.is_open['leap_api']:
+            self.path = self.getPath()
+            print self.path
+            with settings.lock:
+                settings.is_open['leap_api'] = True
+
+        export_data = self.transform_to_json(frame)
+        with open(self.path, 'a') as out:
             res = json.dump(export_data, out, sort_keys=False, indent=2, separators=(',', ': '))
 
-    # def on_frame(self, controller):
-    #     # Get the most recent frame and report some basic information
-    #     frame = controller.frame()
-    #
-    #     print "Frame id: %d, timestamp: %d, hands: %d, fingers: %d" % (
-    #           frame.id, frame.timestamp, len(frame.hands), len(frame.fingers))
-    #
-    #     # Get hands
-        # for hand in frame.hands:
-    #
-    #         handType = "Left hand" if hand.is_left else "Right hand"
-    #
-    #         print "  %s, id %d, position: %s" % (
-    #             handType, hand.id, hand.palm_position)
-    #
-    #         # Get the hand's normal vector and direction
-    #         normal = hand.palm_normal
-    #         direction = hand.direction
-    #
-    #         # Calculate the hand's pitch, roll, and yaw angles
-    #         print "  pitch: %f degrees, roll: %f degrees, yaw: %f degrees" % (
-    #             direction.pitch * Leap.RAD_TO_DEG,
-    #             normal.roll * Leap.RAD_TO_DEG,
-    #             direction.yaw * Leap.RAD_TO_DEG)
-    #
-    #         # Get arm bone
-    #         arm = hand.arm
-    #         print "  Arm direction: %s, wrist position: %s, elbow position: %s" % (
-    #             arm.direction,
-    #             arm.wrist_position,
-    #             arm.elbow_position)
-    #
-    #         # Get fingers
-    #         for finger in hand.fingers:
-    #
-    #             print "    %s finger, id: %d, length: %fmm, width: %fmm" % (
-    #                 self.finger_names[finger.type],
-    #                 finger.id,
-    #                 finger.length,
-    #                 finger.width)
-    #
-    #             # Get bones
-    #             for b in range(0, 4):
-    #                 bone = finger.bone(b)
-    #                 print "      Bone: %s, start: %s, end: %s, direction: %s" % (
-    #                     self.bone_names[bone.type],
-    #                     bone.prev_joint,
-    #                     bone.next_joint,
-    #                     bone.direction)
-    #
-    #     if not frame.hands.is_empty:
-    #         print ""
 
-def main():
-    # Create a sample listener and controller
-    listener = SampleListener()
-    controller = settings.leap_controller
+class SampleListener(Leap.Listener):
+    api_recorder = ApiRecorder()
 
-    # Have the sample listener receive events from the controller
-    controller.add_listener(listener)
+    # def on_init(self, controller):
+    #     print "Initialized"
+    #
+    # def on_connect(self, controller):
+    #     print "Connected"
+    #
+    # def on_disconnect(self, controller):
+    #     # Note: not dispatched when running in a debugger.
+    #     print "Disconnected"
+    #
+    # def on_exit(self, controller):
+    #     print "Exited"
 
-    while settings.exitFlag == False:
-        pass
+    def on_frame(self, controller):
+        frame = controller.frame()
 
-    controller.remove_listener(listener)
+        if settings.is_recording :
+            print 'recording...'
+            self.api_recorder.record(frame)
 
-if __name__ == "__main__":
-    main()
+class CaptureLeapApi(threading.Thread):
+    listener = None
+
+    def run(self):
+        # Create a sample listener and controller
+        self.listener = SampleListener()
+        controller = settings.leap_controller
+
+        # Have the sample listener receive events from the controller
+        controller.add_listener(self.listener)
+
+
+        while(not settings.exitFlag):
+            time.sleep(0.100)
+        self.stop()
+
+    def stop(self):
+        print "Trying to stop leap_api "
+        controller = settings.leap_controller
+        controller.remove_listener(self.listener)
+
+        # thread.exit()
+
+        if self.process is not None:
+            # Release everything if job is finished
+
+            self.process.terminate()
+            self.process = None

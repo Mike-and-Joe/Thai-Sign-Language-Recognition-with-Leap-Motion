@@ -1,25 +1,130 @@
-from lib import Leap
+import main, settings, utils
 
-from CaptureFacetimeCamera import CaptureFacetimeCamera
-from CaptureLeapCamera import CaptureLeapCamera
-import CaptureLeapApi, json
+# Import the modules needed to run the script.
+import sys, os, time
 
-import settings
+# =======================
+#     MENUS FUNCTIONS
+# =======================
 
-if __name__ == '__main__':
-    settings.init()
+# Main menu
 
-    captureFacetimeCamera = CaptureFacetimeCamera(name = "CaptureFacetimeCamera")
-    captureFacetimeCamera.start()
+def main_menu():
+    clear_screen()
 
-    captureLeapCamera = CaptureLeapCamera(name = "CaptureLeapCamera")
-    captureLeapCamera.start()
+    print "Welcome,\n"
+    print "Please choose the menu you want to start:"
+    print "1. Start"
+    print "\nq. Quit"
+    choice = raw_input(" >>  ")
+    exec_menu(choice, {
+        '1': menu_enter_name,
+        'q': exit,
+    })
 
-    CaptureLeapApi.main()
+    return
+
+# Execute menu
+def exec_menu(choice, action):
+    ch = choice.lower()
+    if ch == '':
+        main_menu()
+    else:
+        try:
+            action[ch]()
+        except KeyError:
+            print "Invalid selection, please try again.\n"
+            main_menu()
+    return
+
+# Menu Name
+def menu_enter_name():
+    clear_screen()
+
+    default = settings.file_name
+    default_str = default and ('['+ default +']') or ''
+
+    name = raw_input("Enter File's name " + default_str + ": >>")
+    main.set_file_name(name or default)
+
+    utils.create_folder(settings.path + '/' + settings.file_name)
+
+    menu_enter_index()
+
+# Menu Index
+def menu_enter_index():
+    default = int(utils.get_last_index_from_folder(settings.path + '/' + settings.file_name)) + 1
+    default_str = ('['+ str(default) +']') or ''
+
+    index = raw_input("Enter File's index " + default_str + " : >> ")
+
+    if (index == 'q') :
+        exit()
+
+        return
     
-    while(True):
-        record = raw_input("Record")
-        if record == "y":
-            settings.is_recording = True
-        else:
-            settings.is_recording = False
+    main.set_file_index(index and int(index) or default)
+
+    menu_record_preparing()
+
+# Menu Record Decision
+def menu_record_preparing():
+    clear_screen()
+
+    print "Record Menu,\n"
+    print "Please choose the menu you want to start:"
+    print "1. Start record '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + ".txt'"
+    print "2. Edit Name & Index"
+    print "\nq. Quit"
+    choice = raw_input(" >>  ")
+    exec_menu(choice, {
+        '1': menu_start_record,
+        '2': menu_enter_name,
+        'q': exit,
+    })
+
+    return
+
+# Menu Start Record
+def menu_start_record():
+    clear_screen()
+
+    print "Recording.....,\n"
+    print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
+    choice = raw_input(" Start ? ")
+
+    main.start_record()
+    start_record = time.time()
+
+    choice = raw_input(" Stop ! ")
+
+    print '\nTotal time : ' + str(time.time() - start_record)
+    main.stop_record()
+
+    print "\nNext index,\n"
+    menu_enter_index()
+
+    return
+
+# Exit program
+def exit():
+    main.exit()
+    sys.exit()
+
+# Clear screen
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    # pass
+
+# =======================
+#      MAIN PROGRAM
+# =======================
+
+# Main Program
+if __name__ == "__main__":
+    # Initialized Settings
+    settings.init()
+    # Initialized Cameras
+    main.init()
+    # Launch main menu
+    main_menu()

@@ -1,28 +1,26 @@
-import json
-import numpy as np
+import matplotlib.pyplot as plt 
+import sys
+sys.path.append('..')
+import utils
+import features
+import knn
 
-with open('../record/one/json_10.txt') as json_data:
-    json_data = json.load(json_data)
+data_amount = utils.get_last_index_from_folder('../record/one') + 1
+training_data_amount = int(data_amount * 0.3)
+test_data_amount = data_amount - training_data_amount
 
+tip_distance = features.get_feature_tip_distance(data_amount)
 
-feature_amount = 5
-frame_amount = len(json_data)
-euclid_dist = np.zeros([frame_amount,feature_amount])
-finger_name = ['thumb', 'index', 'middle', 'ring', 'pinky']
+training_tip_data = tip_distance[:, :training_data_amount]
+test_tip_data = tip_distance[:, training_data_amount:]
 
-for frame_no, frame in enumerate(json_data):
-    if not frame['hands']:
-        continue
+sim_mat = knn.create_similarity_matrix(training_tip_data, test_tip_data)
+label_flags = knn.get_label_flags(sim_mat)
 
-    finger_tip = np.zeros([3, 5])
+# tpr_10, far_10 = knn.calculate_sensitivity(sim_mat, 9, label_flags)
+tpr_10 = knn.calculate_sensitivity(sim_mat, 9, label_flags)
 
-    for idx, finger in enumerate(finger_name):
-        finger_tip[:, idx] = np.array(frame['hands']['right']['fingers'][finger]['bones']['distal']['next_joint'])
+plt.imshow(sim_mat,cmap="gray") 
+plt.show() 
 
-    for feature_no in range (feature_amount):
-        curr_finger = finger_tip[:, feature_no]
-        next_finger = finger_tip[:, (feature_no + 1) % 5]
-        euclid_dist[frame_no, feature_no] = np.linalg.norm(curr_finger - next_finger)
-
-euclid_dist_avg = euclid_dist.sum(axis=0) / frame_amount
-print(euclid_dist_avg)
+print("At t = 10 TPR is {0} and FAR is {1}".format(tpr_10, far_10))

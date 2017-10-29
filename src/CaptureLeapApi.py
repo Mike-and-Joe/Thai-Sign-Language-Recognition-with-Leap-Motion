@@ -8,9 +8,8 @@
 
 import sys, thread, time, json, threading, time
 from lib import Leap
-from pprint import pprint
 
-import settings
+import settings, main
 
 def get_list_from_vector (vector) :
     alist = []
@@ -23,6 +22,10 @@ class ApiRecorder():
     bone_names = ['metacarpal', 'proximal', 'intermediate', 'distal']
     path = ''
     export_data = []
+
+    def set_is_open (self, value):
+        with settings.lock:
+            settings.is_open['leap_api'] = value
 
     def get_export_data (self) :
         return self.export_data
@@ -114,8 +117,9 @@ class ApiRecorder():
             self.path = self.getPath()
             print self.path
             self.clear_export_data()
-            with settings.lock:
-                settings.is_open['leap_api'] = True
+            self.set_is_open(True)
+            for key, value in settings.is_open.iteritems():
+                print key, value
 
         self.export_data.append(self.transform_to_json(frame))
 
@@ -123,18 +127,20 @@ class ApiRecorder():
 class SampleListener(Leap.Listener):
     api_recorder = ApiRecorder()
 
-    # def on_init(self, controller):
-    #     print "Initialized"
-    #
-    # def on_connect(self, controller):
-    #     print "Connected"
-    #
-    # def on_disconnect(self, controller):
-    #     # Note: not dispatched when running in a debugger.
-    #     print "Disconnected"
-    #
-    # def on_exit(self, controller):
-    #     print "Exited"
+    def set_ready(self, is_ready):
+        if not settings.is_ready['leap_api']:
+            with settings.lock:
+                settings.is_ready['leap_api'] = is_ready
+
+    def on_exit(self, controller):
+        self.set_ready(False)
+
+    def on_connect(self, controller):
+        self.set_ready(True)
+
+    def on_disconnect(self, controller):
+        # Note: not dispatched when running in a debugger.
+        self.set_ready(False)
 
     def on_frame(self, controller):
         frame = controller.frame()
@@ -145,6 +151,7 @@ class SampleListener(Leap.Listener):
             if len(self.api_recorder.get_export_data()) != 0 :
                 self.api_recorder.export_to_file()
                 self.api_recorder.clear_export_data()
+                self.api_recorder.set_is_open(False)
 
 
 class CaptureLeapApi(threading.Thread):

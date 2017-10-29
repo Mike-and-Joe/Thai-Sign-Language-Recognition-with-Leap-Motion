@@ -1,21 +1,4 @@
-import cv2, time, os
-import settings
-
-def wait_for_ready(_self):
-    while(True):
-        if all(item for item in settings.is_ready):
-            break
-        if settings.exitFlag == True:
-            _self.stop()
-        time.sleep(0.100)
-
-def wait_for_exit_key():
-    if (cv2.waitKey(1) & 0xFF == ord('q')) | settings.exitFlag == True :
-        with settings.lock:
-            settings.exitFlag = True
-        return True
-    else:
-        return False
+import time, os
 
 def create_folder(directory) :
     if not os.path.exists(directory):

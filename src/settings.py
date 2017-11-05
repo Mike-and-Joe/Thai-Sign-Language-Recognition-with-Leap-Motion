@@ -19,13 +19,16 @@ def init():
     exitFlag = False
 
     global is_ready
-    is_ready = {'facetime': False, 'leap_camera': False, 'leap_api': False}
+    is_ready = { 'facetime': False, 'leap_camera': False, 'leap_api': False }
 
     global is_recording
     is_recording = False
 
     global is_open
-    is_open = {'facetime': False, 'leap_camera': False, 'leap_api': False}
+    is_open = { 'facetime': False, 'leap_camera': False, 'leap_api': False }
+
+    global hands
+    hands = { 'left': False, 'right': False }
 
     global file_name
     file_name = ''

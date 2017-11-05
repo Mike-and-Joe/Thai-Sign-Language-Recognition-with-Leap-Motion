@@ -136,6 +136,7 @@ class CaptureLeapCamera(threading.Thread):
             self.output[s].release()
 
         # thread.exit()
+        main.stop_record()
 
         if self.process is not None:
             # Release everything if job is finished

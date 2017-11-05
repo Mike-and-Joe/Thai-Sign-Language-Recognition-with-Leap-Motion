@@ -46,7 +46,6 @@ class ApiRecorder():
 
         for hand in frame.hands:
             _hand = {}
-            _hand['hand_type'] = "Left hand" if hand.is_left else "Right hand"
             _hand['hand_id'] = hand.id
 
             _hand['hand_palm_position'] = get_list_from_vector(hand.palm_position)
@@ -103,6 +102,9 @@ class ApiRecorder():
             # print _hand
             export_per_frame['hands'][_handType] = _hand
             # print export_per_frame
+        with settings.lock:
+            settings.hands['left'] = 'left' in export_per_frame['hands']
+            settings.hands['right'] = 'right' in export_per_frame['hands']
         return export_per_frame
 
     def getPath(self):

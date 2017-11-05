@@ -106,7 +106,10 @@ def menu_show_recording (start_record) :
         clear_screen()
         print "\nRecording.....,\n"
         print '\nTime : ', time.time() - start_record
-        print '\n Stop ! '
+        print '\nLeft hand  : ', '[X]' if settings.hands['left'] else '[_]'
+        print 'Right hand : ', '[X]' if settings.hands['right'] else '[_]'
+        print '\n\n to Stop press Enter ! '
+        time.sleep(0.050)
 
 # Menu Start Record
 def menu_start_record():
@@ -128,7 +131,7 @@ def menu_start_record():
 
 # Conclusion screen
 def conclusion_screen (start_record) :
-    choice = raw_input(" Stop ! ")
+    choice = raw_input()
     main.stop_record()
     clear_screen()
 

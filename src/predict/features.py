@@ -1,14 +1,14 @@
 import numpy as np
 import json
 
-def get_feature_tip_distance(data_amount):
+def get_feature_tip_distance(record_name, data_amount):
     finger_name = ['thumb', 'index', 'middle', 'ring', 'pinky']
 
     tip_distance_amount = 5
     tip_distance = np.zeros([tip_distance_amount, data_amount])
 
     for file_no in range(data_amount): #read from each record
-        with open("../record/one/json_{0}.txt".format(file_no)) as json_data:
+        with open("../record/{0}/json_{1}.txt".format(record_name, file_no)) as json_data:
             json_data = json.load(json_data)
 
         frame_amount = len(json_data)

@@ -1,3 +1,9 @@
 # Compiled source #
 ###################
 *.pyc
+
+# exclude everything
+src/record/*
+
+# exception to the rule
+!src/record/.gitkeep 

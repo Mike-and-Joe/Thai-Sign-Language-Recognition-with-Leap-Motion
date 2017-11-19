@@ -25,14 +25,17 @@ def get_feature_tip_distance(record_name, data_amount):
         try:
             with open("../record/{0}/json_{1}.txt".format(record_name, file_no)) as json_data:
                 json_data = json.load(json_data)
-        except Exception as s:
-            print ('error log:', record_name, file_no)
+        except Exception as e:
+            print ('erro log:', record_name, file_no, Exception)
+            raise
 
         frame_amount = len(json_data)
         euclid_dist = np.zeros([tip_distance_amount, frame_amount])
 
         for frame_no, frame in enumerate(json_data):
-            if not frame['hands'] or not 'right' in frame['hands']: #check if frame[hands] is null or left #check if frame[hands][right] is undefined
+            if not 'hands' in frame or not 'right' in frame['hands'] : #check if frame[hands] is null
+                print("../record/{0}/json_{1}.txt".format(record_name, file_no))
+                print(frame_no)
                 continue
 
             finger_tip = get_finger_tip(frame)

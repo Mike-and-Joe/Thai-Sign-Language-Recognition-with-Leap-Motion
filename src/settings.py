@@ -7,7 +7,7 @@ def init():
     path = 'record'
 
     global camera_index
-    camera_index = 1
+    camera_index = 0
 
     global lock
     lock = threading.Lock()
@@ -27,8 +27,8 @@ def init():
     global is_open
     is_open = { 'facetime': False, 'leap_camera': False, 'leap_api': False }
 
-    global hands
-    hands = { 'left': False, 'right': False }
+    global frame
+    frame = { }
 
     global file_name
     file_name = ''

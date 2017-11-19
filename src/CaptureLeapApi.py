@@ -9,7 +9,7 @@
 import sys, thread, time, json, threading, time
 from lib import Leap
 
-import settings, main
+import settings, main, utils
 
 def get_list_from_vector (vector) :
     alist = []
@@ -22,6 +22,7 @@ class ApiRecorder():
     bone_names = ['metacarpal', 'proximal', 'intermediate', 'distal']
     path = ''
     export_data = []
+    timer = utils.Timer()
 
     def set_is_open (self, value):
         with settings.lock:
@@ -102,9 +103,9 @@ class ApiRecorder():
             # print _hand
             export_per_frame['hands'][_handType] = _hand
             # print export_per_frame
-        with settings.lock:
-            settings.hands['left'] = 'left' in export_per_frame['hands']
-            settings.hands['right'] = 'right' in export_per_frame['hands']
+        if (self.timer.is_time_up(0.200)) :
+            with settings.lock:
+                settings.frame = export_per_frame
         return export_per_frame
 
     def getPath(self):

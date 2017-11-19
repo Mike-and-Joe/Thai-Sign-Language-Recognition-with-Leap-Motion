@@ -1,6 +1,12 @@
 import numpy as np
 import json
 
+def print_while_recording (frame):
+    try:
+        return get_finger_tip(frame)
+    except Exception as e:
+        return { }
+
 def get_finger_tip(frame):
     finger_name = ['thumb', 'index', 'middle', 'ring', 'pinky']
 
@@ -8,7 +14,7 @@ def get_finger_tip(frame):
 
     for idx, finger in enumerate(finger_name):
         finger_tip[:, idx] = np.array(frame['hands']['right']['fingers'][finger]['bones']['distal']['next_joint'])
-    
+
     return finger_tip
 
 def get_feature_tip_distance(record_name, data_amount):
@@ -29,7 +35,7 @@ def get_feature_tip_distance(record_name, data_amount):
                 continue
 
             finger_tip = get_finger_tip(frame)
-            
+
             for curr_idx in range(5):
                 curr_finger = finger_tip[:, curr_idx]
                 for comp_idx in range(5):
@@ -45,5 +51,5 @@ def get_feature_tip_distance(record_name, data_amount):
 
         euclid_dist_avg = euclid_dist.sum(axis=1) / frame_amount
         tip_distance[:, file_no] = euclid_dist_avg
-        
+
     return tip_distance

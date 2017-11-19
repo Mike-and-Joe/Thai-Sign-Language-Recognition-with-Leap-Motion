@@ -1,7 +1,9 @@
-import main, settings, utils
-
 # Import the modules needed to run the script.
-import sys, os, time, threading, cv2
+import sys, os, time, threading, cv2, json
+
+# Import helper modules
+import main, settings, utils
+from predict import features
 
 # =======================
 #     MENUS FUNCTIONS
@@ -104,12 +106,21 @@ def is_device_on () :
 def menu_show_recording (start_record) :
     while settings.is_recording :
         clear_screen()
-        print "\nRecording.....,\n"
-        print '\nTime : ', time.time() - start_record
-        print '\nLeft hand  : ', '[X]' if settings.hands['left'] else '[_]'
-        print 'Right hand : ', '[X]' if settings.hands['right'] else '[_]'
+
+        features_out = features.print_while_recording(settings.frame)
+
+        print '##########################################'
+        print "Recording.....,"
+        print '##########################################'
+        print 'Time : ', time.time() - start_record
+        print '##########################################'
+        print 'Print Features_out: \n', features_out
+        # print json.dumps(features_out, indent = 4, sort_keys= True)
+        # print json.dumps(settings.frame, indent = 4, sort_keys= True)
+        # print '\nLeft hand  : ', '[X]' if settings.hands['left'] else '[_]'
+        # print 'Right hand : ', '[X]' if settings.hands['right'] else '[_]'
         print '\n\n to Stop press Enter ! '
-        time.sleep(0.050)
+        time.sleep(0.500)
 
 # Menu Start Record
 def menu_start_record():
@@ -127,12 +138,13 @@ def menu_start_record():
     t = threading.Thread(name='menu_show_recording', target=menu_show_recording, args=([start_record]))
     t.start()
 
+    choice = raw_input()
+    main.stop_record()
+
     conclusion_screen(start_record)
 
 # Conclusion screen
 def conclusion_screen (start_record) :
-    choice = raw_input()
-    main.stop_record()
     clear_screen()
 
     print '\nTotal time : ' + str(time.time() - start_record)

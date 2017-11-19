@@ -103,51 +103,61 @@ def is_device_on () :
         time.sleep(0.100)
         menu_show_ready_list()
 
-def menu_show_recording (start_record) :
-    while settings.is_recording :
-        clear_screen()
-
-        features_out = features.print_while_recording(settings.frame)
-
-        print '##########################################'
-        print "Recording.....,"
-        print '##########################################'
-        print 'Time : ', time.time() - start_record
-        print '##########################################'
-        print 'Print Features_out: \n', features_out
-        # print json.dumps(features_out, indent = 4, sort_keys= True)
-        # print json.dumps(settings.frame, indent = 4, sort_keys= True)
-        # print '\nLeft hand  : ', '[X]' if settings.hands['left'] else '[_]'
-        # print 'Right hand : ', '[X]' if settings.hands['right'] else '[_]'
-        print '\n\n to Stop press Enter ! '
-        time.sleep(0.500)
-
 # Menu Start Record
 def menu_start_record():
     is_device_on()
 
-    clear_screen()
+    t = threading.Thread(name='menu_show_starting', target=menu_show_starting)
+    t.start()
 
-    print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
-    choice = raw_input(" Start ? ")
-
-
+    choice = raw_input()
     main.start_record()
-    start_record = time.time()
+    start_record_time = time.time()
 
-    t = threading.Thread(name='menu_show_recording', target=menu_show_recording, args=([start_record]))
+    t = threading.Thread(name='menu_show_recording', target=menu_show_recording, args=([start_record_time]))
     t.start()
 
     choice = raw_input()
     main.stop_record()
 
-    conclusion_screen(start_record)
+    conclusion_screen(start_record_time)
+
+def menu_show_starting () :
+    while not settings.is_recording :
+        clear_screen()
+        template_menu_show_what_doing('Wait for start', 'Stop')
+        time.sleep(0.500)
+
+def menu_show_recording (start_record_time) :
+    while settings.is_recording :
+        clear_screen()
+        template_menu_show_what_doing('Recording', 'Stop', ['Time : ' + str(round(time.time() - start_record_time, 2)) + 's'])
+        time.sleep(0.500)
+
+def template_menu_show_what_doing (status_string, next_string, options_string = []) :
+        frame = settings.frame
+
+        features_out = features.print_while_recording(frame)
+
+        print '##########################################'
+        print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
+        print '##########################################'
+        print 'Status : ', status_string
+        print '##########################################'
+        for item in options_string:
+            print item
+            print '##########################################'
+        print '\nLeft hand  : ', '[X]' if 'left' in frame['hands'] else '[_]'
+        print 'Right hand : ', '[X]' if 'right' in frame['hands'] else '[_]'
+        print '\nPrint Features_out: \n', features_out
+        print '\n\n to ', next_string, ' press Enter ! '
 
 # Conclusion screen
-def conclusion_screen (start_record) :
+def conclusion_screen (start_record_time) :
     clear_screen()
 
-    print '\nTotal time : ' + str(time.time() - start_record)
+    print '\nTotal time : ' + str(time.time() - start_record_time)
+    print 'Want to save ?'
     print '\nWriting Files...'
     main.wait_for_finish()
     print '\nDone'

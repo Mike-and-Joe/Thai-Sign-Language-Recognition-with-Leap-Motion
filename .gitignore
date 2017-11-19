@@ -2,6 +2,9 @@
 *.pyc
 
 # exclude everything
+.avi
+.txt
+
 src/record/*
 
 # exception to the rule

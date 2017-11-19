@@ -27,7 +27,7 @@ def main_menu():
 # Execute menu
 def exec_menu(choice, action):
     ch = choice.lower()
-    if ch == '':
+    if ch == 'm':
         main_menu()
     else:
         try:
@@ -76,12 +76,12 @@ def menu_record_preparing():
 
     print "Record Menu,\n"
     print "Please choose the menu you want to start:"
-    print "1. Start record '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
-    print "2. Edit Name & Index"
+    print "(Enter) Start record '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
+    print "(2) Edit Name & Index"
     print "\nq. Quit"
     choice = raw_input(" >>  ")
     exec_menu(choice, {
-        '1': menu_start_record,
+        '': menu_start_record,
         '2': menu_enter_name,
         'q': exit,
     })

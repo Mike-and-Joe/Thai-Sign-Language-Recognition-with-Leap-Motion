@@ -7,7 +7,7 @@ import features
 import knn
 
 records_name = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"]
-dim_amount = 5
+dim_amount = (5 * 5)
 train_tip_dist = np.zeros([dim_amount,0])
 test_tip_dist = np.zeros([dim_amount,0])
 training_data_amount = 3

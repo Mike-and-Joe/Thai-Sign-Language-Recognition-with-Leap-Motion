@@ -3,10 +3,6 @@ import cv2, threading, time
 import settings, main
 
 class CaptureFacetimeCamera(threading.Thread):
-    cap = cv2.VideoCapture(0)
-    cap_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-    cap_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-
     fourcc = cv2.VideoWriter_fourcc(*'MJPG')
     path = ''
     out = None
@@ -15,6 +11,10 @@ class CaptureFacetimeCamera(threading.Thread):
         threading.Thread.__init__(self)
         self.process = None
         self.name = name
+
+        self.cap = cv2.VideoCapture(settings.camera_index)
+        self.cap_width = int(self.cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        self.cap_height = int(self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
     def set_is_open (self, value):
         with settings.lock:

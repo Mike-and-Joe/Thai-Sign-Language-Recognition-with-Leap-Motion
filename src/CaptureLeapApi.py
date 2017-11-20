@@ -23,6 +23,7 @@ class ApiRecorder():
     path = ''
     export_data = []
     timer = utils.Timer()
+    saved = True
 
     def set_is_open (self, value):
         with settings.lock:
@@ -109,8 +110,13 @@ class ApiRecorder():
         return '/'.join(str(x) for x in [settings.path, settings.file_name, 'json_' + str(settings.file_index)]) + '.txt'
 
     def export_to_file (self):
+        self.saved = True
+        # print ('export to file naja')
         with open(self.path, 'a') as out:
             res = json.dump(self.export_data, out, sort_keys=False, indent=2, separators=(',', ': '))
+
+    def is_saved (self):
+        return self.saved
 
     def export_frame_to_global (self, json_frame):
         if (self.timer.is_time_up(0.200)) :
@@ -119,12 +125,15 @@ class ApiRecorder():
 
     def record (self, frame) :
         if not settings.is_open['leap_api']:
+            self.saved = False
             self.path = self.getPath()
             print (self.path)
             self.clear_export_data()
             self.set_is_open(True)
             for key, value in settings.is_open.iteritems():
                 print (key, value)
+
+
 
         json_frame = self.transform_to_json(frame)
         self.export_frame_to_global(json_frame)
@@ -155,7 +164,7 @@ class SampleListener(Leap.Listener):
         if settings.is_recording :
             self.api_recorder.record(frame)
         else :
-            if len(self.api_recorder.get_export_data()) != 0 :
+            if not self.api_recorder.is_saved() :
                 self.api_recorder.export_to_file()
                 self.api_recorder.clear_export_data()
                 self.api_recorder.set_is_open(False)

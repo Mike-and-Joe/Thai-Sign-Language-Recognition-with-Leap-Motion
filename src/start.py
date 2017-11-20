@@ -116,6 +116,7 @@ def menu_start_record():
 
     t = threading.Thread(name='menu_show_recording', target=menu_show_recording, args=([start_record_time]))
     t.start()
+    # print ('End ?')
 
     choice = raw_input()
     main.stop_record()
@@ -125,7 +126,7 @@ def menu_start_record():
 def menu_show_starting () :
     while not settings.is_recording :
         clear_screen()
-        template_menu_show_what_doing('Wait for start', 'Stop')
+        template_menu_show_what_doing('Wait for start', 'Start')
         time.sleep(0.500)
 
 def menu_show_recording (start_record_time) :
@@ -140,9 +141,9 @@ def template_menu_show_what_doing (status_string, next_string, options_string = 
         features_out = features.print_while_recording(frame)
 
         print '##########################################'
-        print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
-        print '##########################################'
         print 'Status : ', status_string
+        print '##########################################'
+        print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
         print '##########################################'
         for item in options_string:
             print item

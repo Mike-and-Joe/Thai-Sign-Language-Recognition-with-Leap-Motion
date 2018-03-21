@@ -1,9 +1,7 @@
-# Import the modules needed to run the script.
-import sys, os, time, threading, cv2, json
-
-# Import helper modules
 import main, settings, utils
-from predict import features
+
+# Import the modules needed to run the script.
+import sys, os, time, threading, cv2
 
 # =======================
 #     MENUS FUNCTIONS
@@ -29,7 +27,7 @@ def main_menu():
 # Execute menu
 def exec_menu(choice, action):
     ch = choice.lower()
-    if ch == 'm':
+    if ch == '':
         main_menu()
     else:
         try:
@@ -78,12 +76,12 @@ def menu_record_preparing():
 
     print "Record Menu,\n"
     print "Please choose the menu you want to start:"
-    print "(Enter) Start record '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
-    print "(2) Edit Name & Index"
+    print "1. Start record '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
+    print "2. Edit Name & Index"
     print "\nq. Quit"
     choice = raw_input(" >>  ")
     exec_menu(choice, {
-        '': menu_start_record,
+        '1': menu_start_record,
         '2': menu_enter_name,
         'q': exit,
     })
@@ -103,61 +101,41 @@ def is_device_on () :
         time.sleep(0.100)
         menu_show_ready_list()
 
+def menu_show_recording (start_record) :
+    while settings.is_recording :
+        clear_screen()
+        print "\nRecording.....,\n"
+        print '\nTime : ', time.time() - start_record
+        print '\nLeft hand  : ', '[X]' if settings.hands['left'] else '[_]'
+        print 'Right hand : ', '[X]' if settings.hands['right'] else '[_]'
+        print '\n\n to Stop press Enter ! '
+        time.sleep(0.050)
+
 # Menu Start Record
 def menu_start_record():
     is_device_on()
 
-    t = threading.Thread(name='menu_show_starting', target=menu_show_starting)
-    t.start()
-
-    choice = raw_input()
-    main.start_record()
-    start_record_time = time.time()
-
-    t = threading.Thread(name='menu_show_recording', target=menu_show_recording, args=([start_record_time]))
-    t.start()
-
-    choice = raw_input()
-    main.stop_record()
-
-    conclusion_screen(start_record_time)
-
-def menu_show_starting () :
-    while not settings.is_recording :
-        clear_screen()
-        template_menu_show_what_doing('Wait for start', 'Stop')
-        time.sleep(0.500)
-
-def menu_show_recording (start_record_time) :
-    while settings.is_recording :
-        clear_screen()
-        template_menu_show_what_doing('Recording', 'Stop', ['Time : ' + str(round(time.time() - start_record_time, 2)) + 's'])
-        time.sleep(0.500)
-
-def template_menu_show_what_doing (status_string, next_string, options_string = []) :
-        frame = settings.frame
-
-        features_out = features.print_while_recording(frame)
-
-        print '##########################################'
-        print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
-        print '##########################################'
-        print 'Status : ', status_string
-        print '##########################################'
-        for item in options_string:
-            print item
-            print '##########################################'
-        print '\nLeft hand  : ', '[X]' if 'left' in frame['hands'] else '[_]'
-        print 'Right hand : ', '[X]' if 'right' in frame['hands'] else '[_]'
-        print '\nPrint Features_out: \n', features_out
-        print '\n\n to ', next_string, ' press Enter ! '
-
-# Conclusion screen
-def conclusion_screen (start_record_time) :
     clear_screen()
 
-    print '\nTotal time : ' + str(time.time() - start_record_time)
-    print 'Want to save ?'
+    print "Files : '" + settings.path + '/' + settings.file_name + '/' + str(settings.file_index) + "'"
+    choice = raw_input(" Start ? ")
+
+
+    main.start_record()
+    start_record = time.time()
+
+    t = threading.Thread(name='menu_show_recording', target=menu_show_recording, args=([start_record]))
+    t.start()
+
+    conclusion_screen(start_record)
+
+# Conclusion screen
+def conclusion_screen (start_record) :
+    choice = raw_input()
+    main.stop_record()
+    clear_screen()
+
+    print '\nTotal time : ' + str(time.time() - start_record)
     print '\nWriting Files...'
     main.wait_for_finish()
     print '\nDone'

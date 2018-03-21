@@ -9,7 +9,7 @@
 import sys, thread, time, json, threading, time
 from lib import Leap
 
-import settings, main, utils
+import settings, main
 
 def get_list_from_vector (vector) :
     alist = []
@@ -22,7 +22,6 @@ class ApiRecorder():
     bone_names = ['metacarpal', 'proximal', 'intermediate', 'distal']
     path = ''
     export_data = []
-    timer = utils.Timer()
 
     def set_is_open (self, value):
         with settings.lock:
@@ -103,32 +102,28 @@ class ApiRecorder():
             # print _hand
             export_per_frame['hands'][_handType] = _hand
             # print export_per_frame
+        with settings.lock:
+            settings.hands['left'] = 'left' in export_per_frame['hands']
+            settings.hands['right'] = 'right' in export_per_frame['hands']
         return export_per_frame
 
     def getPath(self):
         return '/'.join(str(x) for x in [settings.path, settings.file_name, 'json_' + str(settings.file_index)]) + '.txt'
 
-    def export_to_file (self):
+    def export_to_file (self) :
         with open(self.path, 'a') as out:
             res = json.dump(self.export_data, out, sort_keys=False, indent=2, separators=(',', ': '))
-
-    def export_frame_to_global (self, json_frame):
-        if (self.timer.is_time_up(0.200)) :
-            with settings.lock:
-                settings.frame = json_frame
 
     def record (self, frame) :
         if not settings.is_open['leap_api']:
             self.path = self.getPath()
-            print (self.path)
+            print self.path
             self.clear_export_data()
             self.set_is_open(True)
             for key, value in settings.is_open.iteritems():
-                print (key, value)
+                print key, value
 
-        json_frame = self.transform_to_json(frame)
-        self.export_frame_to_global(json_frame)
-        self.export_data.append(json_frame)
+        self.export_data.append(self.transform_to_json(frame))
 
 
 class SampleListener(Leap.Listener):
@@ -159,9 +154,7 @@ class SampleListener(Leap.Listener):
                 self.api_recorder.export_to_file()
                 self.api_recorder.clear_export_data()
                 self.api_recorder.set_is_open(False)
-            else :
-                json_frame = self.api_recorder.transform_to_json(frame)
-                self.api_recorder.export_frame_to_global(json_frame)
+
 
 class CaptureLeapApi(threading.Thread):
     listener = None

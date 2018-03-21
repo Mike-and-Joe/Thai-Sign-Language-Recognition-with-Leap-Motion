@@ -1,0 +1,1325 @@
+[
+  {
+    "frame_id": 813944,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521338796
+  },
+  {
+    "frame_id": 813945,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521348376
+  },
+  {
+    "frame_id": 813946,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521356833
+  },
+  {
+    "frame_id": 813947,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521366013
+  },
+  {
+    "frame_id": 813948,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521374920
+  },
+  {
+    "frame_id": 813949,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521384054
+  },
+  {
+    "frame_id": 813950,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521393142
+  },
+  {
+    "frame_id": 813951,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521401948
+  },
+  {
+    "frame_id": 813952,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521411319
+  },
+  {
+    "frame_id": 813953,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521420054
+  },
+  {
+    "frame_id": 813954,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521429285
+  },
+  {
+    "frame_id": 813955,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521438093
+  },
+  {
+    "frame_id": 813956,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521447268
+  },
+  {
+    "frame_id": 813957,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521456169
+  },
+  {
+    "frame_id": 813958,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521465798
+  },
+  {
+    "frame_id": 813959,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521474380
+  },
+  {
+    "frame_id": 813960,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521483320
+  },
+  {
+    "frame_id": 813961,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521492583
+  },
+  {
+    "frame_id": 813962,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521501425
+  },
+  {
+    "frame_id": 813963,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521510899
+  },
+  {
+    "frame_id": 813964,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521519524
+  },
+  {
+    "frame_id": 813965,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521528867
+  },
+  {
+    "frame_id": 813966,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521537683
+  },
+  {
+    "frame_id": 813967,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521546717
+  },
+  {
+    "frame_id": 813968,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521555617
+  },
+  {
+    "frame_id": 813969,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521564662
+  },
+  {
+    "frame_id": 813970,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521573798
+  },
+  {
+    "frame_id": 813971,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521582772
+  },
+  {
+    "frame_id": 813972,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521591792
+  },
+  {
+    "frame_id": 813973,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521600854
+  },
+  {
+    "frame_id": 813974,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521610007
+  },
+  {
+    "frame_id": 813975,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521618991
+  },
+  {
+    "frame_id": 813976,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521628044
+  },
+  {
+    "frame_id": 813977,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521637074
+  },
+  {
+    "frame_id": 813978,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521646051
+  },
+  {
+    "frame_id": 813979,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521655000
+  },
+  {
+    "frame_id": 813980,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521664067
+  },
+  {
+    "frame_id": 813981,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521673080
+  },
+  {
+    "frame_id": 813982,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521682123
+  },
+  {
+    "frame_id": 813983,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521691191
+  },
+  {
+    "frame_id": 813984,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521700397
+  },
+  {
+    "frame_id": 813985,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521709324
+  },
+  {
+    "frame_id": 813986,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521718333
+  },
+  {
+    "frame_id": 813987,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521727630
+  },
+  {
+    "frame_id": 813988,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521736413
+  },
+  {
+    "frame_id": 813989,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521745621
+  },
+  {
+    "frame_id": 813990,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521754532
+  },
+  {
+    "frame_id": 813991,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521764225
+  },
+  {
+    "frame_id": 813992,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521772631
+  },
+  {
+    "frame_id": 813993,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521781735
+  },
+  {
+    "frame_id": 813994,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521790669
+  },
+  {
+    "frame_id": 813995,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521799704
+  },
+  {
+    "frame_id": 813996,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521808858
+  },
+  {
+    "frame_id": 813997,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521817778
+  },
+  {
+    "frame_id": 813998,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521826932
+  },
+  {
+    "frame_id": 813999,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521835847
+  },
+  {
+    "frame_id": 814000,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521844982
+  },
+  {
+    "frame_id": 814001,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521872024
+  },
+  {
+    "frame_id": 814002,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521881025
+  },
+  {
+    "frame_id": 814003,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521890083
+  },
+  {
+    "frame_id": 814004,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521899247
+  },
+  {
+    "frame_id": 814005,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521908148
+  },
+  {
+    "frame_id": 814006,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521917259
+  },
+  {
+    "frame_id": 814007,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521926352
+  },
+  {
+    "frame_id": 814008,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521935440
+  },
+  {
+    "frame_id": 814009,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521944616
+  },
+  {
+    "frame_id": 814010,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521953407
+  },
+  {
+    "frame_id": 814011,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521962556
+  },
+  {
+    "frame_id": 814012,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521971571
+  },
+  {
+    "frame_id": 814013,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521980735
+  },
+  {
+    "frame_id": 814014,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521989478
+  },
+  {
+    "frame_id": 814015,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931521999045
+  },
+  {
+    "frame_id": 814016,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522007563
+  },
+  {
+    "frame_id": 814017,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522016601
+  },
+  {
+    "frame_id": 814018,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522025781
+  },
+  {
+    "frame_id": 814019,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522034772
+  },
+  {
+    "frame_id": 814020,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522043833
+  },
+  {
+    "frame_id": 814021,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522052765
+  },
+  {
+    "frame_id": 814022,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522061978
+  },
+  {
+    "frame_id": 814023,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522070838
+  },
+  {
+    "frame_id": 814024,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522079997
+  },
+  {
+    "frame_id": 814025,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522088956
+  },
+  {
+    "frame_id": 814026,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522098394
+  },
+  {
+    "frame_id": 814027,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522107157
+  },
+  {
+    "frame_id": 814028,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522116045
+  },
+  {
+    "frame_id": 814029,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522125089
+  },
+  {
+    "frame_id": 814030,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522134185
+  },
+  {
+    "frame_id": 814031,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522143249
+  },
+  {
+    "frame_id": 814032,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522152129
+  },
+  {
+    "frame_id": 814033,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522161580
+  },
+  {
+    "frame_id": 814034,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522170275
+  },
+  {
+    "frame_id": 814035,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522179409
+  },
+  {
+    "frame_id": 814036,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522188355
+  },
+  {
+    "frame_id": 814037,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522197641
+  },
+  {
+    "frame_id": 814038,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522206463
+  },
+  {
+    "frame_id": 814039,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522215576
+  },
+  {
+    "frame_id": 814040,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522224471
+  },
+  {
+    "frame_id": 814041,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522233553
+  },
+  {
+    "frame_id": 814042,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522242788
+  },
+  {
+    "frame_id": 814043,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522251564
+  },
+  {
+    "frame_id": 814044,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522260901
+  },
+  {
+    "frame_id": 814045,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522269678
+  },
+  {
+    "frame_id": 814046,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522278856
+  },
+  {
+    "frame_id": 814047,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522287722
+  },
+  {
+    "frame_id": 814048,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522296994
+  },
+  {
+    "frame_id": 814049,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522305923
+  },
+  {
+    "frame_id": 814050,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522314983
+  },
+  {
+    "frame_id": 814051,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522323985
+  },
+  {
+    "frame_id": 814052,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522332940
+  },
+  {
+    "frame_id": 814053,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522342235
+  },
+  {
+    "frame_id": 814054,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522351034
+  },
+  {
+    "frame_id": 814055,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522360223
+  },
+  {
+    "frame_id": 814056,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522369198
+  },
+  {
+    "frame_id": 814057,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522378315
+  },
+  {
+    "frame_id": 814058,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522387202
+  },
+  {
+    "frame_id": 814059,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522396476
+  },
+  {
+    "frame_id": 814060,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522405441
+  },
+  {
+    "frame_id": 814061,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522414409
+  },
+  {
+    "frame_id": 814062,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522423335
+  },
+  {
+    "frame_id": 814063,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522432551
+  },
+  {
+    "frame_id": 814064,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522441450
+  },
+  {
+    "frame_id": 814065,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522450596
+  },
+  {
+    "frame_id": 814066,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522459547
+  },
+  {
+    "frame_id": 814067,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522468956
+  },
+  {
+    "frame_id": 814068,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522477825
+  },
+  {
+    "frame_id": 814069,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522486627
+  },
+  {
+    "frame_id": 814070,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522496135
+  },
+  {
+    "frame_id": 814071,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522504798
+  },
+  {
+    "frame_id": 814072,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522513916
+  },
+  {
+    "frame_id": 814073,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522522808
+  },
+  {
+    "frame_id": 814074,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522532375
+  },
+  {
+    "frame_id": 814075,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522540867
+  },
+  {
+    "frame_id": 814076,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522549904
+  },
+  {
+    "frame_id": 814077,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522558979
+  },
+  {
+    "frame_id": 814078,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522568115
+  },
+  {
+    "frame_id": 814079,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522577141
+  },
+  {
+    "frame_id": 814080,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522586057
+  },
+  {
+    "frame_id": 814081,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522595281
+  },
+  {
+    "frame_id": 814082,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522604109
+  },
+  {
+    "frame_id": 814083,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522613254
+  },
+  {
+    "frame_id": 814084,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522622292
+  },
+  {
+    "frame_id": 814085,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522631443
+  },
+  {
+    "frame_id": 814086,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522640470
+  },
+  {
+    "frame_id": 814087,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522649350
+  },
+  {
+    "frame_id": 814088,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522658499
+  },
+  {
+    "frame_id": 814089,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522667385
+  },
+  {
+    "frame_id": 814090,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522676480
+  },
+  {
+    "frame_id": 814091,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522685469
+  },
+  {
+    "frame_id": 814092,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522694754
+  },
+  {
+    "frame_id": 814093,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522703686
+  },
+  {
+    "frame_id": 814094,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522712858
+  },
+  {
+    "frame_id": 814095,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522721752
+  },
+  {
+    "frame_id": 814096,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522730907
+  },
+  {
+    "frame_id": 814097,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522739754
+  },
+  {
+    "frame_id": 814098,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522749076
+  },
+  {
+    "frame_id": 814099,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522757776
+  },
+  {
+    "frame_id": 814100,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522766828
+  },
+  {
+    "frame_id": 814101,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522775893
+  },
+  {
+    "frame_id": 814102,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522784879
+  },
+  {
+    "frame_id": 814103,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522794044
+  },
+  {
+    "frame_id": 814104,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522803106
+  },
+  {
+    "frame_id": 814105,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522812132
+  },
+  {
+    "frame_id": 814106,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522821061
+  },
+  {
+    "frame_id": 814107,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522830379
+  },
+  {
+    "frame_id": 814108,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522839118
+  },
+  {
+    "frame_id": 814109,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522848466
+  },
+  {
+    "frame_id": 814110,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522857342
+  },
+  {
+    "frame_id": 814111,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522866409
+  },
+  {
+    "frame_id": 814112,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522875447
+  },
+  {
+    "frame_id": 814113,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522884375
+  },
+  {
+    "frame_id": 814114,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522894200
+  },
+  {
+    "frame_id": 814115,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522902590
+  },
+  {
+    "frame_id": 814116,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522911554
+  },
+  {
+    "frame_id": 814117,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522920437
+  },
+  {
+    "frame_id": 814118,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522929644
+  },
+  {
+    "frame_id": 814119,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522938631
+  },
+  {
+    "frame_id": 814120,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522947837
+  },
+  {
+    "frame_id": 814121,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522956600
+  },
+  {
+    "frame_id": 814122,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522966016
+  },
+  {
+    "frame_id": 814123,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522974637
+  },
+  {
+    "frame_id": 814124,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522983704
+  },
+  {
+    "frame_id": 814125,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931522993476
+  },
+  {
+    "frame_id": 814126,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931523019949
+  },
+  {
+    "frame_id": 814127,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931523029268
+  },
+  {
+    "frame_id": 814128,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931523038245
+  },
+  {
+    "frame_id": 814129,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931523047107
+  },
+  {
+    "frame_id": 814130,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931523056151
+  },
+  {
+    "frame_id": 814131,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931523065481
+  },
+  {
+    "frame_id": 814132,
+    "hands": {},
+    "hand_available": 0,
+    "fingers": 0,
+    "timestamp": 931523074139
+  }
+]

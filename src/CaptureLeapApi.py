@@ -111,8 +111,8 @@ class ApiRecorder():
 
     def export_to_file (self):
         self.saved = True
-        # print ('export to file naja')
-        with open(self.path, 'a') as out:
+        print ('export to file naja')
+        with open(self.path, 'w') as out:
             res = json.dump(self.export_data, out, sort_keys=False, indent=2, separators=(',', ': '))
 
     def is_saved (self):

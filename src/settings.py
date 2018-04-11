@@ -7,7 +7,7 @@ def init():
     path = 'record'
 
     global camera_index
-    camera_index = 1
+    camera_index = 0
 
     global lock
     lock = threading.Lock()
